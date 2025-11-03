@@ -1,0 +1,19 @@
+service: notification-service
+
+plugins:
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  memorySize: 256
+  region: eu-west-1
+  stage: ${opt:stage, 'dev'}
+  
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - http:
+          method: GET
+          path: /hello
